@@ -1,10 +1,10 @@
 package com.upn.app_citaclinica
 
 data class Usuario (
-    var us_id:Int = 0,
-    var us_dni:String,
-    var us_nombres:String,
-    var us_apellidos:String,
-    var us_correo: String,
-    var us_password: String
+    var usuario_id:Int,
+    var usuario_dni:String,
+    var usuario_nombres:String,
+    var usuario_apellidos:String,
+    var usuario_correo: String,
+    var usuario_password: String
 )

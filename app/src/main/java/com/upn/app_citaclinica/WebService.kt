@@ -7,6 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 object AppConstantes {
     const val BASE_URL = "http://192.168.56.1:3000"
@@ -18,6 +19,10 @@ interface WebService {
 
     @POST("/usuario/agregar")
     suspend fun agregarUsuario(@Body usuario: Usuario):Response<String>
+
+    @GET("/usuario/{correo}")
+    suspend fun buscarUsuarioxCorreo(@Path("correo")correo:String):Response<Usuario>
+
 }
 
 object RetrofitCliente {

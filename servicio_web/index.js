@@ -46,16 +46,29 @@ app.get("/usuarios",(req,res)=>{
 })
 app.post("/usuario/agregar", (req, res)=>{
     const usuario = {
-        use_dni: req.body.us_dni,
-        use_nombres: req.body.us_nombres,
-        use_apellidos: req.body.us_apellidos,
-        use_correo: req.body.us_correo,
-        use_password: req.body.us_password
+        usuario_dni: req.body.usuario_dni,
+        usuario_nombres: req.body.usuario_nombres,
+        usuario_apellidos: req.body.usuario_apellidos,
+        usuario_correo: req.body.usuario_correo,
+        usuario_password: req.body.usuario_password
     }
 
     const consulta = "INSERT INTO usuarios SET ?"
     conexion.query(consulta, usuario, (error) =>{
         if(error) return console.error(error.message)
         res.json("Se insertó correctamente el usuario")
+    })
+})
+
+app.get("/usuario/:correo",(req,res)=>{
+    const {correo} = req.params
+    const consulta = "SELECT * FROM usuarios WHERE usuario_correo='"+correo+"'"
+    conexion.query(consulta,(error,rpta) =>{
+        if(error) return console.log(error.message)
+            if(rpta.length > 0){
+                res.json(rpta[0])
+            }else{
+                res.json("no hay registros")
+            }
     })
 })
