@@ -16,33 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuarios`
+-- Table structure for table `especialidades`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
+DROP TABLE IF EXISTS `especialidades`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuarios` (
-  `id_usuario` int NOT NULL AUTO_INCREMENT,
-  `usuario_nombre` varchar(100) NOT NULL,
-  `usuario_apellido` varchar(100) NOT NULL,
-  `usuario_correo` varchar(150) NOT NULL,
-  `usuario_dni` varchar(20) DEFAULT NULL,
-  `usuario_contrasena` varchar(255) NOT NULL,
-  `usuario_tipo` int DEFAULT '1',
-  PRIMARY KEY (`id_usuario`),
-  UNIQUE KEY `usuario_correo` (`usuario_correo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `especialidades` (
+  `id_especialidad` int NOT NULL AUTO_INCREMENT,
+  `especialidad_nombre` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_especialidad`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuarios`
+-- Dumping data for table `especialidades`
 --
 
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Juan','Sanchez','juan@gmail.com','71939609','123',1),(2,'Marcelo','Peceros','marcelo@gmail.com','456','789',1),(3,'JORGE','PEREZ','jorge@gmail.com','4567','456',1);
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+LOCK TABLES `especialidades` WRITE;
+/*!40000 ALTER TABLE `especialidades` DISABLE KEYS */;
+INSERT INTO `especialidades` VALUES (1,'Cardiología'),(2,'Dermatología'),(3,'Oftalmología'),(4,'Medicina Interna'),(5,'Neurología'),(6,'Pediatría'),(7,'Psicología'),(8,'Urología');
+/*!40000 ALTER TABLE `especialidades` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-10-05  2:07:42
+-- Dump completed on 2024-10-05  2:07:43

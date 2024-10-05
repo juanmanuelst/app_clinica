@@ -16,33 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuarios`
+-- Table structure for table `medicos`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
+DROP TABLE IF EXISTS `medicos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuarios` (
-  `id_usuario` int NOT NULL AUTO_INCREMENT,
-  `usuario_nombre` varchar(100) NOT NULL,
-  `usuario_apellido` varchar(100) NOT NULL,
-  `usuario_correo` varchar(150) NOT NULL,
-  `usuario_dni` varchar(20) DEFAULT NULL,
-  `usuario_contrasena` varchar(255) NOT NULL,
-  `usuario_tipo` int DEFAULT '1',
-  PRIMARY KEY (`id_usuario`),
-  UNIQUE KEY `usuario_correo` (`usuario_correo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `medicos` (
+  `id_medico` int NOT NULL AUTO_INCREMENT,
+  `medico_nombre` varchar(100) NOT NULL,
+  `medico_apellido` varchar(100) NOT NULL,
+  `id_especialidad` int DEFAULT NULL,
+  PRIMARY KEY (`id_medico`),
+  KEY `id_especialidad` (`id_especialidad`),
+  CONSTRAINT `medicos_ibfk_1` FOREIGN KEY (`id_especialidad`) REFERENCES `especialidades` (`id_especialidad`) ON DELETE SET NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuarios`
+-- Dumping data for table `medicos`
 --
 
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Juan','Sanchez','juan@gmail.com','71939609','123',1),(2,'Marcelo','Peceros','marcelo@gmail.com','456','789',1),(3,'JORGE','PEREZ','jorge@gmail.com','4567','456',1);
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+LOCK TABLES `medicos` WRITE;
+/*!40000 ALTER TABLE `medicos` DISABLE KEYS */;
+INSERT INTO `medicos` VALUES (1,'Jose','Perez',1),(2,'Jorge','Torres',2),(3,'Martin','Figueroa',3),(4,'Santiago','Castro',4),(5,'Luis','Vasquez',5),(6,'María','Torres',6),(7,'Edith','Quiroz',7),(8,'Abel','Gutierrez',8),(9,'Mathias','Sanchez',1);
+/*!40000 ALTER TABLE `medicos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

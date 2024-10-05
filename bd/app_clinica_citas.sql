@@ -16,33 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuarios`
+-- Table structure for table `citas`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
+DROP TABLE IF EXISTS `citas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuarios` (
-  `id_usuario` int NOT NULL AUTO_INCREMENT,
-  `usuario_nombre` varchar(100) NOT NULL,
-  `usuario_apellido` varchar(100) NOT NULL,
-  `usuario_correo` varchar(150) NOT NULL,
-  `usuario_dni` varchar(20) DEFAULT NULL,
-  `usuario_contrasena` varchar(255) NOT NULL,
-  `usuario_tipo` int DEFAULT '1',
-  PRIMARY KEY (`id_usuario`),
-  UNIQUE KEY `usuario_correo` (`usuario_correo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `citas` (
+  `id_cita` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int DEFAULT NULL,
+  `id_medico` int DEFAULT NULL,
+  `cita_fecha` datetime NOT NULL,
+  `cita_hora` varchar(100) NOT NULL,
+  `cita_estado` int DEFAULT '1',
+  PRIMARY KEY (`id_cita`),
+  KEY `id_usuario` (`id_usuario`),
+  KEY `id_medico` (`id_medico`),
+  CONSTRAINT `citas_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE,
+  CONSTRAINT `citas_ibfk_2` FOREIGN KEY (`id_medico`) REFERENCES `medicos` (`id_medico`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuarios`
+-- Dumping data for table `citas`
 --
 
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Juan','Sanchez','juan@gmail.com','71939609','123',1),(2,'Marcelo','Peceros','marcelo@gmail.com','456','789',1),(3,'JORGE','PEREZ','jorge@gmail.com','4567','456',1);
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+LOCK TABLES `citas` WRITE;
+/*!40000 ALTER TABLE `citas` DISABLE KEYS */;
+INSERT INTO `citas` VALUES (34,1,7,'2024-10-02 00:00:00','15:00',0),(35,1,1,'2024-10-01 00:00:00','18:00',0),(36,1,5,'2024-10-03 00:00:00','14:00',1),(37,1,3,'2024-10-03 00:00:00','16:00',1),(38,1,4,'2024-10-03 00:00:00','09:00',0),(39,1,8,'2024-10-03 00:00:00','11:00',1),(40,1,1,'2024-10-03 00:00:00','15:00',1);
+/*!40000 ALTER TABLE `citas` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

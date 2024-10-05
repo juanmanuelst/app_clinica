@@ -45,6 +45,10 @@ class RegistroActivity : AppCompatActivity() {
         btnRegistrarCuenta.setOnClickListener {
             registrarUsuario()
         }
+        btnRegresarInicio.setOnClickListener {
+            val intent = Intent(baseContext, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun registrarUsuario(){
@@ -52,15 +56,10 @@ class RegistroActivity : AppCompatActivity() {
         val nombres = txtNombres.text.toString()
         val apellidos = txtApellidos.text.toString()
         val correo = editTxtCorreo.text.toString()
-        val password = editTxtPassword.text.toString()
+        val contrasena = editTxtPassword.text.toString()
 
-        Log.d("===","dni: "+dni)
-        Log.d("===","nombres: "+dni)
-        Log.d("===","apellidos: "+dni)
-        Log.d("===","correo: "+dni)
-        Log.d("===","password: "+dni)
 
-        val usuario = Usuario(0, dni, nombres, apellidos, correo, password)
+        val usuario = Usuario(0, nombres, apellidos, correo, dni, contrasena, 1)
 
         CoroutineScope(Dispatchers.IO).launch {
             val rpta = RetrofitCliente.webService.agregarUsuario(usuario)

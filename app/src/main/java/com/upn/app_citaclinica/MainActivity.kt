@@ -1,5 +1,6 @@
 package com.upn.app_citaclinica
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -7,6 +8,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -45,7 +47,8 @@ class MainActivity : AppCompatActivity() {
             val pass = txtPassword.text.toString()
 
             if (correo == "" || pass == "" ){
-                Toast.makeText(baseContext,"Ingrese Correo y/o Password", Toast.LENGTH_LONG).show()
+                mostrartMensaje("Ingrese Correo y/o Password")
+                //Toast.makeText(baseContext,"Ingrese Correo y/o Password", Toast.LENGTH_LONG).show()
             }else{
                 Log.d("===", "txtCorreo: "+txtCorreo.text.toString())
                 Log.d("===", "txtPassword: "+txtPassword.text.toString())
@@ -57,13 +60,15 @@ class MainActivity : AppCompatActivity() {
                         if(rpta.isSuccessful){
                             val usuario = rpta.body()
                             Log.d("===", "usuario: "+usuario)
-                            if(usuario != null && usuario.usuario_password == pass){
+                            if(usuario != null && usuario.usuario_correo == correo && usuario.usuario_contrasena == pass){
                                 val intent = Intent(baseContext, PrincipalActivity::class.java)
-                                intent.putExtra("var_nombres",usuario.usuario_nombres)
-                                intent.putExtra("var_apellidos",usuario.usuario_apellidos)
+                                intent.putExtra("var_nombres",usuario.usuario_nombre)
+                                intent.putExtra("var_apellidos",usuario.usuario_apellido)
+                                intent.putExtra("var_usuario",usuario.id_usuario)
                                 startActivity(intent)
                             }else{
-                                Toast.makeText(baseContext,"Usuario/Password incorrectos", Toast.LENGTH_LONG).show()
+                                mostrartMensaje("Usuario/Password incorrectos")
+                            //Toast.makeText(baseContext,"Usuario/Password incorrectos", Toast.LENGTH_LONG).show()
                             }
                         }
                     }
@@ -72,5 +77,14 @@ class MainActivity : AppCompatActivity() {
 
 
         }
+    }
+
+    private fun mostrartMensaje(mensaje: String) {
+        val ventana = AlertDialog.Builder(this)
+        ventana.setTitle("Informacion")
+        ventana.setMessage(mensaje)
+        ventana.setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, which ->
+        })
+        ventana.create().show()
     }
 }
